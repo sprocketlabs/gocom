@@ -3,6 +3,7 @@ package gocom
 
 import (
     "testing"
+    "strings"
 )
 
 // TestHelloName calls greetings.Hello with a name, checking
@@ -13,7 +14,7 @@ func TestStripWhitespaceFromString(t *testing.T) {
     normalString := normalize(str)
     match := expectedString == normalString
 	if !match {
-        t.Fatalf(`[Assertion Error] Expected: (%q) || Result: (%q)`, expectedString, normalString)
+        t.Fatalf(`[Assertion Error] Expecting: (%q) || Result: (%q)`, expectedString, normalString)
     }
 }
 
@@ -23,6 +24,24 @@ func TestLowercaseString(t *testing.T) {
     normalString := normalize(str)
     match := expectedString == normalString
 	if !match {
-        t.Fatalf(`[Assertion Error] Expected: (%q) || Result: (%q) ")`, expectedString, normalString)
+        t.Fatalf(`[Assertion Error] Expecting: (%q) || Result: (%q) ")`, expectedString, normalString)
+    }
+}
+
+func TestItemInList(t *testing.T) {
+    str := "hello"
+    stringList := []string {"hello", "world"}
+    strExistsInList := stringInSlice(str, stringList)
+	if !strExistsInList {
+        t.Fatalf(`[Assertion Error] Expecting: (%q) in List (%q) ")`, str, strings.Join(stringList, " "))
+    }
+}
+
+func TestItemNotInList(t *testing.T) {
+    str := "hello"
+    stringList := []string {"hi", "world"}
+    strExistsInList := stringInSlice(str, stringList)
+	if strExistsInList {
+        t.Fatalf(`[Assertion Error] Not Expecting: (%q) in List (%q) ")`, str, strings.Join(stringList, " "))
     }
 }
