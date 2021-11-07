@@ -1,0 +1,2 @@
+# gocom
+Common Go Functions
