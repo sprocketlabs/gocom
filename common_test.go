@@ -4,6 +4,7 @@ package gocom
 import (
     "testing"
     "strings"
+    "reflect"
 )
 
 // TestHelloName calls greetings.Hello with a name, checking
@@ -43,5 +44,17 @@ func TestItemNotInList(t *testing.T) {
     strExistsInList := stringInSlice(str, stringList)
 	if strExistsInList {
         t.Fatalf(`[Assertion Error] Not Expecting: (%q) in List (%q) ")`, str, strings.Join(stringList, " "))
+    }
+}
+
+func TestGetKeysFromMap(t *testing.T) {
+    m := map[string]int{
+        "a": 0,
+        "b": 1,
+    }
+    keys := getMapKeys(m)
+    expectedKeys := []string {"a", "b"}
+    if !(reflect.DeepEqual(keys, expectedKeys)) {
+        t.Fatalf(`[Assertion Error] Lists do not match: (%q) != (%q) ")`, strings.Join(keys, " "), strings.Join(expectedKeys, " "))
     }
 }
