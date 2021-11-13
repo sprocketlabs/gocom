@@ -6,6 +6,14 @@ import (
 	"strings"
 )
 
+func IsValidPhoneNumber(phoneNumber string) bool {
+	rawPhoneNumber, err := RawPhoneNumber(phoneNumber)
+	if err != nil {
+		return false
+	}
+	return StringInSlice(strconv.Itoa(rawPhoneNumber)[0:3], validCountryCallingCodes)
+}
+
 func RawPhoneNumber(phoneNumber string) (int, error) {
 	charactersToStrip := []string{" ", ",", "-", "|", "(", ")"}
 
@@ -20,14 +28,15 @@ func RawPhoneNumber(phoneNumber string) (int, error) {
 	return value, err
 }
 
-func FormatPhoneNumber(phoneNumber []int) string {
-	countryCode := ""
-	areaCode := ""
-	localNumber := ""
+func FormatPhoneNumber(phoneNumber int) string {
+	phoneString := strconv.Itoa(phoneNumber)
+	countryCode := phoneString[0:3]
+	areaCode := phoneString[3:7]
+	localNumber := phoneString[7:10]
 	return fmt.Sprintf("(%s) %s-%s", countryCode, areaCode, localNumber)
 }
 
-var ValidCountryCallingCodes = []string{
+var validCountryCallingCodes = []string{
 	"1", "7", "20", "27",
 	"30", "31", "32", "33",
 	"34", "36", "39", "40",
