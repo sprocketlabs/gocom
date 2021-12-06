@@ -3,7 +3,6 @@ package gocom
 import (
 	"fmt"
 	"strconv"
-	"strings"
 )
 
 func IsValidPhoneNumber(phoneNumber string) bool {
@@ -15,16 +14,14 @@ func IsValidPhoneNumber(phoneNumber string) bool {
 }
 
 func RawPhoneNumber(phoneNumber string) (int, error) {
+
 	charactersToStrip := []string{" ", ",", "-", "|", "(", ")"}
+	sanitizedNumber := StripAll(phoneNumber, charactersToStrip)
 
-	for _, char := range charactersToStrip {
-		phoneNumber = strings.Replace(phoneNumber, char, "", len(phoneNumber))
-	}
-
-	if len(phoneNumber) != 9 {
+	if len(sanitizedNumber) != 9 {
 		panic("Error")
 	}
-	value, err := strconv.Atoi(phoneNumber)
+	value, err := strconv.Atoi(sanitizedNumber)
 	return value, err
 }
 

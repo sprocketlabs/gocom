@@ -1,6 +1,8 @@
 package gocom
 
-import "time"
+import (
+	"time"
+)
 
 func NowUTC() time.Time {
 	return time.Now().UTC()
@@ -11,5 +13,5 @@ func Now() time.Time {
 }
 
 func TimeString(t time.Time) string {
-	return ""
+	return t.Format(time.RFC3339Nano)
 }

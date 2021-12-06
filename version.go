@@ -1,6 +1,10 @@
 package gocom
 
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+	"strings"
+)
 
 type Version struct {
 	major int
@@ -8,14 +12,30 @@ type Version struct {
 	patch string
 }
 
-func FormatVersion(major, minor int, patch string) string {
-	return fmt.Sprintf("v%d.%d.%s", major, minor, patch)
+func (v *Version) VersionToString() string {
+	return fmt.Sprintf("v%d.%d.%s", v.major, v.minor, v.patch)
 }
 
-func ParseVersion(version string) *Version {
-	return nil
+func StringToVersion(v string) Version, error {
+	version_data := strings.Split(v, ".")
+	if (len(version_data) != 3) {
+		return nil, errors.New("Error")
+	}
+
+	major, ma_err := strconv.Atoi(version_data[0])
+	minor, mi_err := strconv.Atoi(version_data[1])
+
+	if ma_err || mi_err {
+		return nil, errors.New("Error")
+	}
+
+	return Version{
+		major: ,
+		minor: 2,
+		patch: version_data[2],
+	}, nil
 }
 
-func IsSupported() bool {
+func IsSupported(currentVersion Version, supportedVersions []Version) bool {
 	return false
 }

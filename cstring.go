@@ -25,6 +25,14 @@ func StringInSlice(str string, list []string) bool {
 	return false
 }
 
+func StripAll(str string, charactersToStrip []string) string {
+	sanitizedString := str
+	for _, char := range charactersToStrip {
+		sanitizedString = strings.ReplaceAll(str, char, "")
+	}
+	return sanitizedString
+}
+
 func StrAt(slice []string, str string) int {
 	for pos, s := range slice {
 		if s == str {
