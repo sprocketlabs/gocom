@@ -1,6 +1,8 @@
 package gocom
 
+/*
 import (
+	"errors"
 	"fmt"
 	"strconv"
 	"strings"
@@ -16,9 +18,9 @@ func (v *Version) VersionToString() string {
 	return fmt.Sprintf("v%d.%d.%s", v.major, v.minor, v.patch)
 }
 
-func StringToVersion(v string) Version, error {
+func StringToVersion(v string) (Version, error) {
 	version_data := strings.Split(v, ".")
-	if (len(version_data) != 3) {
+	if len(version_data) != 3 {
 		return nil, errors.New("Error")
 	}
 
@@ -30,8 +32,8 @@ func StringToVersion(v string) Version, error {
 	}
 
 	return Version{
-		major: ,
-		minor: 2,
+		major: major,
+		minor: minor,
 		patch: version_data[2],
 	}, nil
 }
@@ -39,3 +41,4 @@ func StringToVersion(v string) Version, error {
 func IsSupported(currentVersion Version, supportedVersions []Version) bool {
 	return false
 }
+*/
